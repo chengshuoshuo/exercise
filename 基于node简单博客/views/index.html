@@ -1,0 +1,62 @@
+{{if user}}
+{{include './header.html',{t:'首页',u:user,s:searchName} }}
+{{else}}
+{{include './header.html',{t:'首页',s:searchName} }}
+{{/if}}
+<div class="right">
+    {{if issue.length<=0}}
+    此板块没有内容
+    {{else if issue.length>0}}
+    <div class="index">
+        {{each issue i}}
+        <div class="content">
+            <div class="content-text">
+                <div class="title">标题：<a href="/blog/{{i._id.toString()}}">{{i.issuetitle}}</a></div>
+                <div class="message">作者: <a href="/name/{{i.auther._id.toString()}}">{{i.auther.username}}</a>
+                    &emsp;日期：{{i.time}}&emsp; 标签：
+                    {{each i.issuetag j}}
+                    <a href="/tag/{{j.toString()}}">{{j}}</a>
+                    {{/each}}
+                </div>
+                <div class="sub" style="color:#999999;"><p>{{i.issuecontent}}</p></div>
+                <div class="comnum"></div>
+            </div>
+            <div class="content-number">
+                <span>阅读数：</span><span>{{if !i.readNumber}}0 {{else if i.readNumber}}  {{i.readNumber}}{{/if}}</span>
+                &emsp;<span>评论数：</span><span>{{i.comment.length}}</span>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+    <div class="page">
+
+    </div>
+
+    {{if searchid}}
+
+    {{if page>1}}
+    <a href="{{searchid.toString()}}page={{page-1}}">上一页</a>
+    {{/if}}
+    <span>第{{page}}/{{allpage}}页</span>
+    {{if page!=allpage}}
+    <a href="{{searchid.toString()}}page={{page+1}}">下一页</a>
+    {{/if}}
+
+
+    {{else if !searchid}}
+    {{if page>1}}
+    <a href="/?page={{page-1}}">上一页</a>
+    {{/if}}
+    <span>第{{page}}/{{allpage}}页</span>
+    {{if page!=allpage}}
+    <a href="/?page={{page+1}}">下一页</a>
+    {{/if}}
+    {{/if}}
+
+
+    {{/if}}
+</div>
+</div>
+</main>
+</body>
+{{include './footer.html'}}

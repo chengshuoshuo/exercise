@@ -1,0 +1,46 @@
+{{if user}}
+{{include './header.html',{t:'存档',u:user,active:"file"} }}
+{{else}}
+{{include './header.html',{t:'存档',active:"file"} }}
+{{/if}}
+
+
+{{if data.length<=0}}
+<div class="right">
+    <div class="document">
+        这里还没有人留下博客哦
+    </div>
+</div>
+{{else if data.length>0}}
+
+<div class="right">
+    {{each data i}}
+    {{if lastYear!=i.time.slice(0,4)*1}}
+    <h3 class="title">
+        {{lastYear=i.time.slice(0,4)}}年
+    </h3>
+    {{/if}}
+    <div class="document">
+        <span class="title-time">{{i.time}}</span>
+        <span class="title-content"><a href="/blog/{{i._id.toString()}}">{{i.issuetitle}}</a></span>
+    </div>
+    {{/each}}
+    <div id="page">
+        {{if page!=1}}
+        <span class="prev"><a href="?page={{page-1}}">上一页</a></span>
+        {{/if}}
+
+        <span>{{page}}/{{allpage}}</span>
+
+        {{if page!=allpage}}
+        <span class="prev"><a href="?page={{page+1}}">下一页</a></span>
+        {{/if}}
+
+    </div>
+</div>
+
+{{/if}}
+</div>
+</main>
+</body>
+{{include './footer.html'}}

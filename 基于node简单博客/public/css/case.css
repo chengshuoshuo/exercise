@@ -1,0 +1,355 @@
+header, div, p, a, label {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+
+header {
+    width: 100%;
+    min-width: 1000px;
+    height: 62px;
+    line-height: 60px;
+    -webkit-box-shadow: 1px 1px 1px #999;
+    -moz-box-shadow: 1px 1px 1px #999;
+    box-shadow: 1px 1px 1px #999;
+    position: relative;
+    z-index: 2;
+}
+
+.container {
+    width: 1000px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+header .logo {
+    font-size: 24px;
+    float: left;
+}
+
+header .form {
+    float: left;
+    font-size: 18px;
+    width: 100px;
+}
+
+header .form div {
+    width: 50%;
+    text-align: center;
+    color: #333;
+}
+
+header .list {
+    float: right;
+    display: flex;
+}
+
+header .item {
+    padding-left: 20px;
+}
+
+header .item.active {
+    color: orange;
+}
+
+header .item a {
+    display: block;
+    height: inherit;
+}
+main .left {
+    width: 250px;
+    height: 800px;
+    float: left;
+
+}
+
+main .right {
+    margin-top: 10px;
+    padding-top: 10px;
+    width: 720px;
+    float: right;
+    border: 3px double #f7f7f7;
+    padding: 5px;
+    background: #fefefe;
+}
+.divimg{
+    padding: 10%;
+    width: 100%;
+    margin: 0 auto;
+    padding-bottom: 0;
+    border: 1px solid #efefef;
+}
+.divimg img{
+    display: block;
+    width: 100%;
+}
+.divimg div{
+    ;
+    padding:20px 5px 5px 5px;
+    text-align: center;
+    border-top: 1px solid #efefef;
+}
+.img-show{
+    margin-top: 10px;
+    width: 100%;
+    background: #f7f7f7;
+    padding-bottom: 1px;
+}
+.img-show .img-title{
+    width: 100%;
+    padding: 10px  10px;
+    background: #efefef;
+}
+.img-show .img-content{
+    margin: 10px;
+    padding: 20px;
+    background: white;
+}
+.img-show img{
+    width: 100%;
+    display: block;
+
+}
+.search-form {
+    width: 100%;
+    height: 50px;
+    padding: 6px;
+    background: #f7f7f7;
+}
+
+.search-form input[type=text] {
+    width: 180px;
+    height: 30px;
+    font-size: 28px;
+    background: white;
+}
+
+.search-form button {
+    width: 40px;
+    height: 30px;
+    vertical-align: 4px;
+}
+.search-show{
+    margin-top:10px ;
+    background: #f7f7f7;
+}
+
+.index .content {
+
+    border: 1px solid #eee;
+    margin-bottom: 10px;
+    background: white
+}
+
+.index.content-text {
+    width: 560px;
+}
+
+.index .content-text > div {
+    margin: 5px;
+}
+
+.index .content-text > div a:hover {
+    color: orange;
+}
+
+.index .content-text .sub p {
+    margin: 10px;
+    height: 40px;
+    line-height: 22px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -s-text-overflow:ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+.index .content .sub {
+    height: 100%;
+    margin: 10px;
+}
+
+.index .content .content-number {
+    padding: 15px;
+    border-top: 1px solid gray;
+}
+
+/*注册时的样式*/
+.formEngin {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.formEngin form {
+    width: 300px;
+    height: 220px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid gray;
+    padding: 30px;
+    padding-top: 10px;
+}
+
+.formEngin form div {
+    padding: 2px;
+}
+
+.formEngin form input[type=text],
+.formEngin form input[type=password],
+.formEngin form input[type=number] {
+    width: 200px;
+    height: 24px;
+}
+
+/*登录的样式*/
+.formLogin {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.formLogin h3 {
+    padding-bottom: 20px;
+}
+
+.formLogin form {
+    width: 300px;
+    height: 160px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid gray;
+    padding: 30px;
+    padding-top: 10px;
+}
+
+.formLogin form div {
+    padding: 5px;
+}
+
+.formLogin form input[type=text],
+.formLogin form input[type=password] {
+    width: 200px;
+    height: 24px;
+}
+
+
+/*发布的样式*/
+.issue {
+    width: 100%;
+}
+
+.issue .title {
+    width: 100%;
+}
+
+/*查看文档的样式*/
+.article {
+    border: 1px solid #fefefe;
+	    background: #fff;
+}
+
+.article .article-title {
+    margin: 10px;
+    border: 1px solid #efefef;
+    padding: 10px;
+}
+
+.article .article-content {
+    margin: 10px;
+    border: 1px solid #efefef;
+    padding: 10px;
+    display: flex;
+    align-content: flex-start;
+}
+
+.article .article-content .article-content-title {
+    /*flex-basis: 25%;*/
+    width: 100px;
+}
+
+.article .article-content .article-content-sub {
+    flex-basis: 100px;
+    flex-grow: 1;
+}
+
+.article .article-updateOrdel {
+    margin: 0 10px;
+    padding: 0 10px;
+}
+
+.article .article-xinxi {
+    margin: 10px;
+    border: 1px solid #efefef;
+    padding: 10px;
+}
+
+.article .article-guest {
+    margin: 10px;
+    border: 1px solid #efefef;
+    padding: 10px;
+}
+
+.article .article-guest form {
+    width: 100%;
+    display: flex;
+    flex-direction: column-reverse;
+
+}
+
+.article .article-guest .article-guest-content {
+    width: 100%;
+}
+
+.article .article-guest .article-guest-content textarea {
+    width: 100%;
+    resize: none;
+}
+
+.article .article-guest-yijing {
+    padding: 20px;
+    border-top: 1px solid gray;
+}
+
+.article .article-guest-sup, .article .article-guest-sub {
+    display: flex;
+    width: 100%;
+}
+
+.article .article-guest-sup {
+    margin-bottom: 10px;
+}
+
+.article .article-guest-sub {
+    margin-top: 10px;
+}
+
+.article .article-guest-title {
+    width: 100px;
+}
+
+.article .article-guest-content {
+    flex-grow: 1;
+    position: relative;
+}
+
+.article .article-guest-time {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+/*用户页面的样式*/
+.userAdmin table {
+    width: 80%;
+    margin: 0 auto;
+    border-collapse: collapse;
+}
+
+.userAdmin table th, .userAdmin table td {
+    border: 1px solid #333;
+    padding: 5px;
+    font-size: 18px;
+}

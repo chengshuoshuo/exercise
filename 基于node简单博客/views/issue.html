@@ -1,0 +1,30 @@
+{{if user}}
+{{include './header.html',{t:'发布',u:user,active:"issue"} }}
+{{else}}
+{{include './header.html',{t:'发布',active:"issue"} }}
+{{/if}}
+
+<div class="right">
+    <div class="issue">
+        <form action="/issue/go" method="post">
+            <div class="title">
+                <label for="title">标题：<input type="text" id="title" name="issuetitle"></label>
+            </div>
+            <div class="tag">
+                <label for="tag">标签：<input type="text" id="tag" name="issuetag">
+                    <input type="text" id="tag1" name="issuetag">
+                    <input type="text" id="tag2" name="issuetag">
+                </label>
+            </div>
+            <div class="issuecontent">
+                <div><label for="content">内容</label></div>
+                <textarea name="issuecontent" id="content" style="width: 100%;height: 100px;resize: none;"></textarea>
+            </div>
+            <button type="submit">发布</button>
+        </form>
+        <div class="error">{{error}}</div>
+    </div>
+</div>
+</div>
+</main>
+{{include './footer.html'}}

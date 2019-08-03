@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="/js/jquery-3.4.1.js"> </script>
+    <script src="/js/template-web.js"></script>
+    <script src="/js/layer-v3.1.1/layer/layer.js"></script>
+    <script src="/js/base.js"></script>
+    <title>注册</title>
+</head>
+<body>
+<form>
+    <label>账号<input type="text" name="name"></label><br>
+    <label>密码<input type="text" name="password"></label><br>
+    <label>确认<input type="text" name="password2"></label><br>
+    <label>年龄<input type="text" name="age"></label><br>
+    <label>性别
+        <input type="radio" name="sex" value="1" checked>男
+        <input type="radio" name="sex" value="0">女
+    </label>
+    <br>
+    <label>
+       专业
+        <select name="major" id="">
+            <option value="html">html</option>
+            <option value="css">css</option>
+            <option value="javascript">javascript</option>
+        </select>
+    </label>
+    <br>
+    <label>
+        爱好
+        <input type="checkbox" name="hobby" value="游戏">游戏
+        <input type="checkbox" name="hobby" value="娱乐">娱乐
+        <input type="checkbox" name="hobby" value="音乐">音乐
+    </label>
+    <br>
+
+    <button type="button" id="engine">注册</button>
+    <a href="login.html">登录</a>
+</form>
+
+
+</body>
+<script>
+
+    // ajax请求button不能type=submin 要将button设置为button
+    //$.ajaxSetup()     设置ajax请求的基本配置 会影响到
+
+
+    $('#engine').click(()=>{
+        let params=$('form').serialize();
+        $.ajax({
+            url:'http://127.0.0.1:3000/user/engine',
+            data:params,
+            method:'POST',
+            success:function (data) {
+                console.log(data);
+                if(data.err==1){
+                    layer.msg(data.msg,{icon: 2})
+                }else{
+                    layer.msg(data.msg,{icon:1});
+                }
+            }
+        })
+    })
+</script>
+</html>

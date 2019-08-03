@@ -1,0 +1,23 @@
+{{include './header.html',{t:'登录',f:'t'}  }}
+<main>
+    <div class="container">
+        <div class="formLogin">
+            <form action="/login" method="post">
+                <h3>登录页面</h3>
+                <div class="loginName">
+                    <label for="username">姓名：</label><input type="text" id="username" name="username"><br></div>
+                <div class="loginPassword">
+                    <label for="password">密码：</label><input type="password" id="password" name="password"><br>
+                </div>
+                <div class="loginbtn"><button type="submit">登录</button>
+                </div>
+                <div>{{error}}</div>
+            </form>
+        </div>
+
+
+    </div>
+</main>
+</body>
+
+{{include './footer.html'}}

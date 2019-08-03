@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="/js/jquery-3.4.1.js"></script>
+    <script src="/js/template-web.js"></script>
+    <script src="/js/layer-v3.1.1/layer/layer.js"></script>
+    <title>头像修改</title>
+    <style>
+        #main .headerimg {
+            width: 200px;
+            height: 200px;
+            border: 1px solid gray;
+        }
+
+        #main .headerimg img {
+            width: inherit;
+        }
+    </style>
+
+</head>
+<body>
+<div id="main">
+
+</div>
+</body>
+<script type="text/html" id="img-art">
+    <div class="headerimg">
+        <img src="{{user.img}}" alt="" alt="" id="logoImg">
+        <input type="file" name="myimg" id="upimg" hidden>
+    </div>
+    <button type="button" id="upload">图片修改</button>
+    <a href="index.html">首页</a>
+</script>
+<script>
+    function search(data) {
+        var htmlStr = template('img-art', data);
+        $('#main').html(htmlStr);
+    }
+
+    $.post('/user', data => {
+        if (data.err == 0) {
+            location.href = "/";
+        } else {
+            search(data);
+        }
+    });
+
+
+    $('body').on('click', '#logoImg', function () {
+        $(this).next().click();
+    });
+
+    var file;
+    $('body').on('change', '#upimg', function () {
+        file = this.files[0];
+        $(this).prev().attr('src', URL.createObjectURL(file));
+    });
+
+
+    $('body').on('click', '#upload', function () {
+        var fd = new FormData();
+        fd.append('myimg', file);
+        $.ajax({
+            url: '/upload',
+            method: 'POST',
+            data: fd,
+            contentType: false,  //文件上传时不设置请求头
+            processData: false   //不处理发送的数据
+        }).then(data => {
+            layer.msg(data.msg);
+            search(data);
+        }).catch(err => {
+
+        });
+    })
+</script>
+</html>

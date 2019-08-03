@@ -1,0 +1,32 @@
+{{if user}}
+{{include './header.html',{t:'发布',u:user.username} }}
+{{else}}
+{{include './header.html',{t:'发布'} }}
+{{/if}}
+
+<div class="right">
+    <div class="issue">
+        <form action="/updata/go" method="post">
+            <div class="title">
+                <label for="title">标题：<input type="text" id="title" name="issuetitle"
+                                             value="{{data.issuetitle}}"></label>
+            </div>
+            <div class="tag">
+                <label for="tag">标签：<input type="text" id="tag" name="issuetag" value="{{data.issuetag[0]}}">
+                    <input type="text" id="tag1" name="issuetag" value="{{data.issuetag[1]}}">
+                    <input type="text" id="tag2" name="issuetag" value="{{data.issuetag[2]}}">
+                </label>
+            </div>
+            <div class="issuecontent">
+                <div><label for="content">内容</label></div>
+                <textarea name="issuecontent" id="content" style="width: 100%;height: 100px;resize: none;">{{data.issuecontent}}</textarea>
+            </div>
+            <input type="text" value="{{data._id}}" name="id" hidden>
+            <button type="submit">发布</button>
+        </form>
+        <div class="error">{{error}}</div>
+    </div>
+</div>
+</div>
+</main>
+{{include './footer.html'}}

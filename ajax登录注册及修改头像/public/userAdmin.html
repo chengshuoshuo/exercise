@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>主页</title>
+    <script src="/js/template-web.js"></script>
+    <script src="/js/jquery-3.4.1.js"></script>
+    <script src="/js/layer-v3.1.1/layer/layer.js"></script>
+    <style>
+        img {
+            width: 100px;
+        }
+    </style>
+</head>
+<body>
+<form>
+    <div id="main">
+
+    </div>
+</form>
+</body>
+
+
+<script id="main-art" type="text/html">
+
+    <table>
+        <tr>
+            <td>头像：</td>
+            <td>
+                <a href="upload.html">
+                <img src="{{user.img}} " >
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <td>账号</td>
+            <td>{{user.username}}</td>
+        </tr>
+        <tr>
+            <td>年龄：</td>
+            <td><input type="text" name="age" value="{{user.age}} "></td>
+        </tr>
+        <tr>
+            <td>性别：</td>
+            <td>
+                <input type="radio" name="sex" value="男" {{user.sex== "男"?'checked':''}}>
+                男
+                <input type="radio" name="sex" value="女" {{user.sex== "女"?'checked':''}}>
+                女
+            </td>
+        </tr>
+        <tr>
+            <td>专业</td>
+            <td>
+
+                <select name="major" id="major">
+                    <option value="html5" {{user.major=="html5"?"selected":''}}>html5</option>
+                    <option value="css3" {{user.major=="css3"?"selected":''}}>css3</option>
+                    <option value="javascript" {{user.major=="javascript"?"selected":''}}>javascript</option>
+                </select>
+
+            </td>
+        </tr>
+        <tr>
+            <td>爱好</td>
+            <td>
+                {{if user.hobby}}
+                <input type="checkbox" name="hobby" value="运动" {{user.hobby.indexOf('运动')+1? 'checked':''}} >运动
+                <input type="checkbox" name="hobby" value="游戏" {{user.hobby.indexOf('游戏')+1? 'checked':''}} >游戏
+                <input type="checkbox" name="hobby" value="音乐" {{user.hobby.indexOf('音乐')+1? 'checked':''}} >音乐
+                {{else if !user.hobby}}
+                <input type="checkbox" name="hobby" value="运动">运动
+                <input type="checkbox" name="hobby" value="游戏">游戏
+                <input type="checkbox" name="hobby" value="音乐">音乐
+                {{/if}}
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <button type="button" id="updata">修改</button>
+
+            </td>
+            <td><a href="/">首页</a>
+
+            </td>
+        </tr>
+    </table>
+</script>
+
+
+<script>
+
+    function search(data) {
+        var htmlStr = template('main-art', data);
+        $('#main').html(htmlStr);
+    }
+
+    $.post('/user', data => {
+        if(data.err==0){
+            location.href="/";
+        }else{
+            search(data);
+        }
+    });
+
+
+    $('body').on('click', '#updata', function () {
+        var params = $('form').serialize();
+        $.post('/updata', params, data => {
+            layer.msg(data.msg);
+            search(data);
+        })
+    });
+
+
+</script>
+</html>

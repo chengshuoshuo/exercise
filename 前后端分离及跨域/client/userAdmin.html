@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="/js/jquery-3.4.1.js"></script>
+    <script src="/js/layer-v3.1.1/layer/layer.js"></script>
+    <script src="/js/template-web.js"></script>
+    <script src="/js/base.js"></script>
+    <title>Document</title>
+    <style>
+        .img{
+            width: 200px;
+        }
+        .img img{
+            width: inherit;
+        }
+    </style>
+</head>
+<body>
+
+<form id="img-form">
+    <div class="img"><img id="headerimg" src="" alt="">
+        <input type="file" name="myimg" id="myimg">
+    </div>
+</form>
+<form id="form">
+
+</form>
+</body>
+<script id="form-art" type="text/html">
+
+    <label>账号<input type="text" name="name" value="{{user.name}}"></label><br>
+    <label>年龄<input type="text" name="age" value="{{user.age}}"></label><br>
+    <label>性别
+        <input type="radio" name="sex" value="1"{{user.sex==1?'checked':''}}>男
+        <input type="radio" name="sex" value="0" {{user.sex==0?'checked':''}} >女
+    </label>
+    <br>
+    <label>
+        专业
+        <select name="major" id="">
+            <option value="html"  {{user.major=='html'?'selected':''}} >html</option>
+            <option value="css" {{user.major=='css'?'selected':''}} selected>css</option>
+            <option value="javascript" {{user.major=='javascript'?'selected':''}}>javascript</option>
+        </select>
+    </label>
+    <br>
+    <label>
+        爱好
+        <input type="checkbox" name="hobby" value="游戏" {{user.hobby.indexOf("游戏")*1+1?"checked":"" }}   >游戏
+        <input type="checkbox" name="hobby" value="娱乐"{{user.hobby.indexOf("娱乐")*1+1?"checked":"" }} >娱乐
+        <input type="checkbox" name="hobby" value="音乐"{{user.hobby.indexOf("音乐")*1+1?"checked":"" }} >音乐
+    </label>
+    <br>
+    <button type="button" id="updata">修改</button>
+    <a href="index.html">首页</a>
+</script>
+
+<script>
+    function info() {
+        $.ajax({
+            url: 'http://127.0.0.1:3000/user/info',
+            method: 'GET',
+            success: function (data) {
+                console.log(data);
+                if(data.err){
+                    location.href='/';
+                }else{
+                    var htmlStr=template('form-art',data);
+                    $('#form').html(htmlStr);
+                    $('#headerimg').attr('src',data.user.headerurl)
+                }
+            }
+        });
+    }
+
+    info();
+
+    $('body').on('click','#updata',()=>{
+      var parms=$('#form').serialize();
+      $.post("http://127.0.0.1:3000/user/edit",parms,data=>{
+          if(!data.err){
+              layer.msg(data.msg,{icon:1})
+          }
+      });
+
+       var fd=new FormData();
+       console.log(file);
+        fd.append('myimg',file);
+        $.ajax({
+            url:"http://127.0.0.1:3000/user/upload",
+            method: 'POST',
+            data:fd,
+            contentType:false,
+            processData: false
+        }).then(data=>{
+            console.log(data);
+        })
+
+
+    });
+
+    $('#headerimg').click(function () {
+        $(this).next().click();
+    });
+    var file;
+    $('#myimg').change(function () {
+        file=this.files[0];
+        $(this).prev().attr("src",URL.createObjectURL(file));
+    })
+</script>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>主页</title>
+    <script src="/js/template-web.js"></script>
+    <script src="/js/jquery-3.4.1.js"></script>
+    <script src="/js/layer-v3.1.1/layer/layer.js"></script>
+    <style> 
+    img{
+        width: inherit;
+        border-radius: 50%;
+    }
+    </style>
+</head>
+<body>
+    
+<div id="nav">
+
+</div>
+
+</body>
+
+
+
+
+<script id="nav-art" type="text/html">
+{{if !err}}
+    <nav>
+        <span><a href="engine.html">注册</a> &emsp;<a href="login.html">登录</a></span>
+    </nav>
+{{else if err}}
+<nav>
+    <span> <a href="userAdmin.html"><span style="height:30px;width:30px;display:inline-block"><img src="{{user.img}}" alt=""></span></a><a href="userAdmin.html">{{user.username}}的主页</a> &emsp;<a id='goout'>退出</a></span>
+</nav>
+
+{{/if}}
+</script>
+
+
+<script>
+$.post('/user',data=>{
+    var htmlStr=template('nav-art',data);
+    $('#nav').html(htmlStr);
+
+});
+
+$('#nav').on('click','#goout',function(){
+    $.post('/goout',data=>{
+        layer.msg(data.msg);
+        var htmlStr=template('nav-art',data);
+        $('#nav').html(htmlStr);
+    })
+})
+
+   
+
+</script>
+</html>

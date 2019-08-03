@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="/js/jquery-3.4.1.js"></script>
+    <script src="/js/template-web.js"></script>
+    <script src="/js/layer-v3.1.1/layer/layer.js"></script>
+    <script src="/js/base.js"></script>
+    <title>登录界面</title>
+</head>
+<body>
+<form>
+    <label>账号<input type="text" name="name"></label><br>
+    <label>密码<input type="text" name="password"></label><br>
+    <button type="button" id="login">登录</button>
+    <a href="engine.html">注册</a>
+    <a href="index.html">首页</a>
+</form>
+</body>
+<script>
+    $('#login').click(() => {
+        var parms=$('form').serialize();
+        $.get('http://127.0.0.1:3000/user/login',parms,data=>{
+            if(!data.err){
+                layer.msg(data.msg,{icon:1});
+            }else{
+                layer.msg(data.msg,{icon:2})
+            }
+        })
+    });
+</script>
+
+</html>

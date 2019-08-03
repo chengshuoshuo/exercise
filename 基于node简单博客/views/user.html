@@ -1,0 +1,59 @@
+{{if user}}
+{{include './header.html',{t:'首页',u:user} }}
+{{else}}
+{{include './header.html',{t:'首页'} }}
+{{/if}}
+
+
+<div class="right">
+    <div class="userAdmin">
+        <table>
+            <thead>
+            <tr>
+                <th colspan="2">用户信息展示</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>姓名</td>
+                <td>{{user.username}}</td>
+            </tr>
+            <tr>
+                <td>性别</td>
+                <td>{{user.sex}}</td>
+            </tr>
+            <tr>
+                <td>年龄</td>
+                <td> {{user.age}}</td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="/userAdminUpdata" style="color:orange; ">
+                        修改信息</a>
+                </td>
+                <td>
+                    <form action="/userimg" method="post" enctype="multipart/form-data">
+                        <label for="userimg" style="color: orange;">更换头像</label>
+                        <input type="file" id="userimg" name="headerimg" accept="image/*" hidden>
+                        <button type="submit">确定变更</button>
+                    </form>
+                </td>
+
+            </tr>
+            </tbody>
+
+
+        </table>
+
+    </div>
+</div>
+</div>
+</main>
+</body>
+<script>
+document.getElementById('userimg').onchange=function () {
+var file=this.files[0];
+document.getElementById('header-img').src=URL.createObjectURL(file);
+}
+</script>
+{{include './footer.html'}}

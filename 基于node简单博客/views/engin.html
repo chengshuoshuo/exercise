@@ -1,0 +1,25 @@
+{{include './header.html',{t:'注册',f:'t'}  }}
+<main>
+    <div class="container">
+        <div class="formEngin">
+            <form action="/engin" method="post">
+                <h3>注册信息</h3>
+                <div class="enginName">  <label for="username">姓名：</label><input type="text" id="username" name="username"></div>
+                <div class="enginSex"><label>性别：</label><input type="radio" name="sex" value="男" checked>男 <input type="radio" name="sex" value="女">女</div>
+                <div class="enginAge"><label for="age">年龄：</label><input id="age" name="age" type="number" oninput="value=value.replace(/[^\d]/g,'').slice(0,2)"></div>
+                <div class="enginpasword"><label for="password">密码：</label><input type="password" id="password" name="password"></div>
+                <div class="enginpasword"><label for="password2">确认：</label><input type="password" id="password2" name="password2"></div>
+                <div class="enginbtn"> <button type="submit">注册</button></div>
+                {{if error}}
+                <div>{{error}}</div>
+                {{/if}}
+            </form>
+
+        </div>
+
+    </div>
+
+</main>
+</body>
+
+{{include './footer.html'}}

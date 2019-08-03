@@ -1,0 +1,94 @@
+{{if user}}
+{{include './header.html',{t:'阅读'+content.issuetitle,u:user.username} }}
+{{else}}
+{{include './header.html',{t:'阅读'+content.issuetitle} }}
+{{/if}}
+
+<div class="right">
+    <div class="article">
+        <div class="article-title">
+            文档标题：<span style="font-size: 18px;color:gray;">{{content.issuetitle}}</span>
+        </div>
+        <div class="article-content">
+            <div class="article-content-title"> 文档内容：</div>
+            <div class="article-content-sub">
+                {{content.issuecontent}}
+            </div>
+        </div>
+        {{if user}}
+        {{if user._id ==content.auther}}
+        <div class="article-updateOrdel">
+            <span class="del"><a href="/del/?id={{content._id}}">删除</a></span>
+            <span class="update"><a href="/updata/{{content._id.toString()}}">编辑</a></span>
+        </div>
+        {{/if}}
+        {{/if}}
+        <div class="article-xinxi" style="position:relative;"><span>发布时间：</span>{{content.time}}
+            <span>标签：</span>{{each content.issuetag i}}
+            <a href="/tag/{{i}}">{{i}}</a>
+            {{/each}}
+            <div class="read" style="padding: 10px;position: absolute; right: 0;top: 0;">
+                阅读次数：<span>{{content.readNumber}}</span> 评论次数：<span>{{content.comment.length}}</span>
+            </div>
+
+        </div>
+
+
+        {{each content.comment i}}
+        {{each con j}}
+        {{if i._id.toString() == j._id.toString() }}
+        <div class="article-guest-yijing">
+            <div class="article-guest-sup">
+                <div class="article-guest-title">
+                    评论人
+                </div>
+                <div class="article-guest-content">
+                    {{j.user.username}}
+                    <div class="article-guest-time">
+                        {{i.time}}回复
+                    </div>
+                </div>
+            </div>
+            <div class="article-guest-sub">
+                <div class="article-guest-title">
+                    评论内容
+                </div>
+                <div class="article-guest-content">
+                    {{i.guestText}}
+                </div>
+            </div>
+        </div>
+        {{/if}}
+        {{/each}}
+        {{/each}}
+
+        {{if user}}
+        <div class="article-guest">
+            <form action="/guest" method="post">
+                <div class="article-guest-submit">
+                    <button>评论</button>
+                    <input type="text" name="_id" value="{{content._id}}" hidden>
+                </div>
+                <div class="article-guest-content"><textarea name="guest" id="" cols="30" rows="10"></textarea>
+                </div>
+            </form>
+        </div>
+        {{/if}}
+    </div>
+</div>
+</div>
+</main>
+</body>
+<script>
+    window.onload = function () {
+        var del = document.getElementsByClassName('del')[0];
+        del.onclick = function (e) {
+            if (!confirm('确定删除吗？')) {
+                e.preventDefault();
+            }
+        }
+
+
+    }
+</script>
+{{include './footer.html'}}

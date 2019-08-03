@@ -1,0 +1,27 @@
+{{if user}}
+{{include './header.html',{t:'标签墙',u:user,active:"tag"} }}
+{{else}}
+{{include './header.html',{t:'标签墙',active:"tag"} }}
+{{/if}}
+
+
+{{if tag2.length==0}}
+<div class="right">
+    <div class="document">
+        没有人留下博客哦
+    </div>
+</div>
+{{else if tag2.length>0}}
+<div class="right">
+    <h3 class="title">
+        {{data[0].time.slice(0,4)}}年&emsp;标签
+    </h3>
+    {{each tag2 i}}
+    <a href="/tag/{{i.toString()}}" style="display: inline-block; padding: 5px;">{{i}}</a>
+    {{/each}}
+</div>
+{{/if}}
+</div>
+</main>
+</body>
+{{include './footer.html'}}

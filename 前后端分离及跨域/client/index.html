@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="/js/jquery-3.4.1.js"></script>
+    <script src="/js/layer-v3.1.1/layer/layer.js"></script>
+    <script src="/js/base.js"></script>
+    <title>首页</title>
+    <style>
+        #imglogo {
+            display: inline-block;
+        }
+
+        #imglogo {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        #userimg {
+            width: 20px;
+        }
+    </style>
+</head>
+<body>
+<div id="on">
+    <a href="engine.html">注册</a>
+    <a href="login.html">登录</a>
+</div>
+<div id="hidden">
+    <div id="imglogo"><img id="userimg" alt=""></div>
+    <a href="userAdmin.html" id="user"></a>
+    <span id="logout">退出登录</span>
+</div>
+</body>
+<script>
+    function info() {
+        $.ajax({
+            url: 'http://127.0.0.1:3000/user/info',
+            method: 'GET',
+            success: function (data) {
+                console.log(data);
+                if (data.err) {
+                    $("#on").show();
+                    $('#hidden').hide();
+                } else {
+                    $("#on").hide();
+                    $('#hidden').show().find('a').html(data.user.name);
+                    $('#userimg').attr('src', data.user.headerurl);
+                }
+            }
+        });
+    }
+
+    info();
+    $('#logout').click(() => {
+        layer.confirm('确定退出？', {
+            btn: ['取消', '确定'] //按钮
+        }, function () {
+            layer.msg('退出已取消', {
+                time: 500,
+                icon: 1
+            });
+        }, function () {
+            $.get('http://127.0.0.1:3000/user/goout', data => {
+                layer.msg(data.msg, {
+                    time: 20000, //20s后自动关闭
+                    btn: ['明白了']
+                });
+                info();
+            });
+        });
+
+
+        $.get('http://127.0.0.1:3000/user/goout', data => {
+
+
+        })
+
+    })
+</script>
+</html>
+<!--打开静态服务器 运行代码-->

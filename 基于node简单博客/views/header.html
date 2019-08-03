@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{t}}</title>
+    <link rel="icon" href="/img/ico.png">
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/case.css">
+</head>
+<body>
+
+<header>
+    <div class="container">
+        {{if u}}
+        <div class="logo">
+            <div><a href="/user">{{u.username}}</a>
+                <a href="/goout" style="font-size: 20px;">退出</a></div>
+        </div>
+        {{else}}
+        <div class=" form">
+            <div class="login" style="float: left;"><a href="/login">登录</a></div>
+            <div class="engin" style="float: right;"><a href="/engin">注册</a></div>
+        </div>
+        {{/if}}
+        <ul class="list">
+            <li class="item {{if !active}}active{{/if}}"><a href="/">首页</a></li>
+            <li class="item {{if active=='file'}}active{{/if}}"><a href="/file">存档</a></li>
+            <li class="item  {{if active=='tag'}}active{{/if}}"><a href="/tag">标签</a></li>
+            <li class="item {{if active=='issue'}}active{{/if}}"><a href="/issue">发布</a></li>
+        </ul>
+    </div>
+</header>
+{{if !f}}
+<main>
+    <div class="container">
+        <div class="left">
+            {{if u}}
+            <div class="divimg">
+                <img id="header-img" src="{{u.headerurl}}" alt="">
+                <div>{{u.username}}</div>
+            </div>
+            {{/if}}
+            <div class="search-form">
+                <form action="/search" method="get">
+                    <input type="text" name="search">
+                    <button type="submit">查询</button>
+                </form>
+            </div>
+            
+            {{if s}}
+            <div class="search-show" style="border: 1px solid gray;padding: 10px;">
+                搜索 {{s}}
+            </div>
+            {{else if !s}}
+            <div class="search-show" style="border: 1px solid gray;padding: 10px;">
+                {{if active=="file"}}文章归档
+                {{else if active=="tag"}}标签分类
+                {{else }}热门博客 {{/if}}
+            </div>
+
+            {{/if}}
+            <div class="img-show">
+                <div class="img-title">关注</div>
+               <div class="img-content"> <img src="/img/erweima.png" alt=""></div>
+            </div>
+        </div>
+        {{/if}}
