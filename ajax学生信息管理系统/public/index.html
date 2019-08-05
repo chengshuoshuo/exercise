@@ -1,0 +1,503 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/css/normalize.css">
+    <link rel="stylesheet" href="/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/start-tamplate.css">
+    <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
+    <script src="/js/jquery-3.4.1.js"></script>
+    <script src="/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <script src="/js/layer/layer.js"></script>
+    <title>学生信息管理系统</title>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">学生信息管理系统</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">首页</a></li>
+                <li><a href="#about">学生管理</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                学生信息管理系统
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <button type="button" class="btn btn-success " data-toggle="modal" data-target="#appModal">添加添加学生</button>
+            <button class="btn btn-warning" id="search" data-toggle="modal" data-target="#searchModal"><i
+                    class="fa fa-search" aria-hidden="true"></i>搜索
+            </button>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="student-btn-group"></div>
+
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row student-table">
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="student-page-group">
+
+        </div>
+    </div>
+</div>
+
+<!--添加学生的模块-->
+<div class="modal fade" id="appModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">添加学生</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="app-form">
+                    <div class="form-group">
+                        <label for="inputname" class="col-sm-2 control-label">用户名</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputname" name="name" placeholder="用户名">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputname" class="col-sm-2 control-label">性别</label>
+                        <div class="col-sm-10">
+                            <label class="radio-inline">
+                                <input type="radio" name="sex" id="inlineRadio1" value="男" checked> 男
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="sex" id="inlineRadio2" value="女"> 女
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputage" class="col-sm-2 control-label">年龄</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="inputage" name="age" placeholder="年龄">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputphone" class="col-sm-2 control-label">联系方式</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" name="phone" id="inputphone" placeholder="联系方式">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-2 control-label">邮箱</label>
+                        <div class="col-sm-10">
+                            <input type="email" class="form-control" id="inputEmail3" name="email" placeholder="Email">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputtext" class="col-sm-2 control-label">留言</label>
+                        <div class="col-sm-10">
+                            <textarea class="form-control" id="inputtext" rows="3" name="content"
+                                      style="resize: none"></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id='appendStudent'>添加</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--编辑部分的模块框-->
+<div class="modal fade" id="upModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">编辑学生信息</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="up-form">
+                    <div class="form-group">
+                        <label for="upname" class="col-sm-2 control-label">用户名</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="upname" name="name" placeholder="用户名" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">性别</label>
+                        <div class="col-sm-10">
+                            <label class="radio-inline">
+                                <input type="radio" name="sex" id="upsexnan" value="男" checked> 男
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="sex" id="upsexnv" value="女"> 女
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="upage" class="col-sm-2 control-label">年龄</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="upage" name="age" placeholder="年龄">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="upphone" class="col-sm-2 control-label">联系方式</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" name="phone" id="upphone" placeholder="联系方式">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="upEmail" class="col-sm-2 control-label">邮箱</label>
+                        <div class="col-sm-10">
+                            <input type="email" class="form-control" id="upEmail" name="email" placeholder="Email">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="uptext" class="col-sm-2 control-label">留言</label>
+                        <div class="col-sm-10">
+                            <textarea class="form-control" id="uptext" rows="3" name="content"
+                                      style="resize: none"></textarea>
+                        </div>
+                    </div>
+                    <input type="text" name="id" id="upid" hidden>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id='upStudent'>修改</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--搜索模块-->
+<div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">搜索学生信息</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="search-form">
+                    <div class="form-group">
+                        <label for="search-name" class="col-sm-2 control-label">用户名</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="search-name" name="name" placeholder="用户名">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">性别</label>
+                        <div class="col-sm-10">
+                            <label class="radio-inline">
+                                <input type="radio" name="sex" value="" checked>不选
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="sex" value="男"> 男
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="sex" value="女"> 女
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="search-age" class="col-sm-2 control-label">年龄</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="search-age" name="age" placeholder="年龄">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="search-phone" class="col-sm-2 control-label">联系方式</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" name="phone" id="search-phone" placeholder="联系方式">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="search-Email" class="col-sm-2 control-label">邮箱</label>
+                        <div class="col-sm-10">
+                            <input type="email" class="form-control" id="search-Email" name="email" placeholder="Email">
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id='searchStudent'>搜索</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+<script src="js/template-web.js">
+</script>
+<!--查询信息列表模板-->
+<script id="app-art" type="text/html">
+
+    {{if data.length!=0}}
+    <table class="table table-bordered ">
+        <tr>
+            <td>姓名</td>
+            <td>年龄</td>
+            <td>性别</td>
+            <td>手机号</td>
+            <td>邮箱</td>
+            <td>修改</td>
+            <td>删除</td>
+        </tr>
+        {{each data user}}
+        <tr>
+            <td>{{user.name}}</td>
+            <td>{{user.age}}</td>
+            <td>{{user.sex}}</td>
+            <td>{{user.phone}}</td>
+            <td>{{user.email}}</td>
+            <td class="up" data-toggle="modal" data-target="#upModal">
+                <span class="glyphicon glyphicon-pencil"></span>
+                <input type="text" value="{{user._id}}" hidden>
+            </td>
+            <td class="del"><span class=" glyphicon glyphicon-trash" aria-hidden="true"></span>
+                <input type="text" value="{{user._id}}" hidden>
+            </td>
+
+        </tr>
+        {{/each}}
+    </table>
+
+    {{/if}}
+</script>
+
+<!--插叙信息取消按钮组模版 -->
+<script id="btn-art" type="text/html">
+    {{if name}}
+    <div class="btn-group">
+        <button type="button" class="btn btn-danger" id="namebtn" data-name="name">用户名:<span>{{name}} </span></button>
+        <button type="button" class="btn btn-danger dropdown-toggle btnclose" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
+            <span><i class="fa fa-times" aria-hidden="true"></i></span>
+        </button>
+    </div>
+    {{/if}}
+    {{if age}}
+    <div class="btn-group">
+        <button type="button" class="btn btn-danger" id="agebtn" data-name="age">年龄:<span>{{age}}</span></button>
+        <button type="button" class="btn btn-danger dropdown-toggle btnclose" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
+            <span><i class="fa fa-times" aria-hidden="true"></i></span>
+        </button>
+    </div>
+    {{/if}}
+    {{if sex}}
+    <div class="btn-group">
+        <button type="button" class="btn btn-danger" id="sexbtn" data-name="sex">性别:<span>{{sex}}</span></button>
+        <button type="button" class="btn btn-danger dropdown-toggle btnclose" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
+            <span><i class="fa fa-times" aria-hidden="true"></i></span>
+        </button>
+    </div>
+    {{/if}}
+    {{if phone}}
+    <div class="btn-group">
+        <button type="button" class="btn btn-danger" id="phonebtn" data-name="phone">手机号:<span>{{phone}}</span></button>
+        <button type="button" class="btn btn-danger dropdown-toggle btnclose" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
+            <span><i class="fa fa-times" aria-hidden="true"></i></span>
+        </button>
+    </div>
+    {{/if}}
+</script>
+
+<!--分页按钮组模板-->
+<script id="page-art" type="text/html">
+{{if allpage}}
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            <li id="pre-btn" class=" <%= current_page==1?'disabled':'' %>">
+                <a href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <% for( var i=0;i< allpage ;i++){%>
+
+            <li class="page-index <%= current_page==i+1?'active':''%>" >
+                <span <%= current_page<i||current_page>i+2?'style=display:none':'' %>><%= i+1 %></span>
+            </li>
+            <%}%>
+            <li id="next-btn" class="<%= current_page==allpage?'disabled':'' %>">
+                <a href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+{{/if}}
+</script>
+<script>
+    // 添加信息
+    $('#appendStudent').click(() => {
+        var parse = $('#app-form').serialize();
+        $.post('/student/append', parse, (data) => {
+            // $('#app-form').find("input").not("[type=radio]").val("");
+            // $("#app-form").find('input[type=radio]').eq(1).removeAttr('checked');
+            if (data.err == 0) {
+                layer.msg(data.errtext);
+                return;
+            } else {
+                layer.msg('添加成功');
+                search();
+            }
+        })
+    });
+    //信息删除
+    $(".student-table").on('click', '.del', function () {
+        var parse = $(this).children('input').val();
+        layer.confirm('确定删除吗？', {
+            btn: ['取消', '确定'] //按钮
+        }, function () {
+            layer.msg('删除取消了', {icon: 1});
+        }, function () {
+            $.get('/student/del', {id: parse}, (data) => {
+                if (data.err == 1) {
+                    layer.msg('删除成功');
+                    search();
+
+                }
+            })
+        });
+
+    });
+
+    //编辑信息展示
+    $('.student-table').on('click', '.up', function () {
+        var parse = $(this).children('input').val();
+        $.get('/student/getup', {id: parse}, data => {
+
+            $('#upname').val(data.data.name);
+            $('#upage').val(data.data.age);
+            $('#upphone').val(data.data.phone);
+            $('#upEmail').val(data.data.email);
+            $('#uptext').html(data.data.content);
+            $('#upid').val(data.data._id);
+            if ($('#upsexnan').val() == data.data.sex) {
+                $('#upsexnan').attr('checked', '');
+            } else {
+                $('#upsexnv').attr('checked', '');
+            }
+        })
+    });
+
+    //编辑信息
+    $('#upStudent').on('click', function () {
+        var params = $('#up-form').serialize();
+        $.post('/student/up', params, data => {
+            if (data.err == 1) {
+                layer.msg('修改成功');
+                search();
+            }
+        });
+    });
+
+
+    var show_count = 5;
+    var current_page = 1;
+    var all_page;
+    var condition = {};
+
+
+    //搜索信息
+    $('#searchStudent').click(function () {
+
+
+        paramArr = $('#search-form').serializeArray();
+        condition={};
+        paramArr.forEach(item=>{
+            condition[item.name] = item.value;
+        });
+
+        search();
+        current_page = 1;
+
+    });
+    search();
+    function search() {
+        condition.page = current_page;
+        condition.show_count = show_count;
+        $.get('/student/search', condition , (data) => {
+
+            var htmlstr = template('app-art', {data: data.data});
+            $('.student-table').html(htmlstr);
+
+            all_page= data.allpage;
+            var pagestr = template('page-art', {allpage: data.allpage, current_page});
+            $('.student-page-group').html(pagestr);
+
+            var btnstr=template('btn-art',condition);
+            $('.student-btn-group').html(btnstr);
+
+        });
+    }
+//查询条件按钮
+
+    $('.student-btn-group').on('click','.btnclose',function () {
+        delete condition[$(this).prev().attr('data-name')]
+        search();
+    });
+    //分页按钮
+    $('.student-page-group').on('click','.page-index',function () {
+            current_page= $(this).text();
+            search();
+    });
+    $('.student-page-group').on('click','#pre-btn',function () {
+        if(current_page>1){
+            console.log(current_page);
+            current_page--;
+            search();
+        }
+    });
+    $('.student-page-group').on('click','#next-btn',function () {
+        if(current_page<all_page){
+            current_page++;
+            search();
+        }
+    });
+    console.log(condition);
+
+
+</script>
+</html>
